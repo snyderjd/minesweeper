@@ -5,6 +5,9 @@ import Tile from './Tile';
 class Board extends Component {
     constructor(props) {
         super(props)
+
+        this.renderRows = this.renderRows.bind(this);
+        this.renderTiles = this.renderTiles.bind(this);
     }
 
     render() {
@@ -21,7 +24,7 @@ class Board extends Component {
         const board = this.props.board;
         return board.grid.map((row, i) => {
             return (
-                <div className="board-row" key={`row-${i}`}>
+                <div className="row" key={`row-${i}`}>
                     {this.renderTiles(row, i)}
                 </div>
             )
@@ -31,7 +34,12 @@ class Board extends Component {
     renderTiles(row, i) {
         const board = this.props.board;
         return row.map((tile, j) => {
-            <Tile tile={tile} updateGame={this.props.updateGame} key={i * board.gridSize + j}/>
+            return (
+                <Tile 
+                    tile={tile} 
+                    updateGame={this.props.updateGame} 
+                    key={i * board.gridSize + j} />
+            )
         })
     }
 }
